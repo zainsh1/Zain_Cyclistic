@@ -80,5 +80,23 @@ Lastly,
 DELETE FROM bikedata
 WHERE trip_duration < 5
 
-<img src="count_of_riders.PNG">
+Dashboard at https://public.tableau.com/views/Zain_ShareefCyclisticAnalysis/Zain_ShareefCyclisticAnalysis?:language=en-US&:display_count=n&:origin=viz_share_link
+
+Conclusions:
+
+  1) As we can see from the dashboard, there are slightly more members than casuals 52% vs 48% respectively, however we can see that on average and total trip duration,
+  casuals spend almost double the amount of time on average per session (15.36 mins vs 30.09 mins).
+  
+  2) Casual riders use Cyclistic bikes more during the weekend versus members who use them more during the weekdays, this is most probably because members utilize the bikes to ride and from work.
+  We can also see that for both categories, most active usages are at about 5pm. Also the spike early in the morning 7-8am seems to suggest members use it for work purposes.
+  
+  3) Stations near or in tourist areas are more likely to be used by casual riders than members for a more leisure use. Also we can see that most active days for Casual riders are from Friday to Sunday.
+  Mostly peaking on Saturday & Sunday, where as for members it's relatively consistent throughout the week, actually Sunday is also the least popular day for members to ride out.
+  
+How could we use these trends to help Cyclistic to create a marketing strategy to increase revenue?
+
+  1) Partner with the city’s department of tourism/businesses to create promotion offers for Cyclistic members to encourage more cyclers.
+  2) Create advertisements in popular stations and stations near tourist areas, where it's proven to attract the most amount of people interested in cycling.
+  3) Create a members-only reward program to incentivize casual riders to sign up as a member, especially targetted to regular casual members.
+  4) Create a membership plan for the weekends only where the prices are cheaper. Create a cost analysis for semi-regular customers so as to benefit them with an active membership.
 
