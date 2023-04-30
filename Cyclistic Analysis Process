@@ -1,3 +1,80 @@
 # Zain_Cyclistic Data Analyst with MS SQL Server & Tableau
 
-##TEST
+Background
+For this case study, I am working as a junior data analyst in the marketing analyst team at Cyclistic, a fictional bike-share company based in Chicago. Since 2016, the company has grown to a fleet of 5,824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other stations within the network at any time.
+Cyclistic has three pricing plans: single-ride passes, full-day passes, and annual memberships. Customers who purchased single-ride or full-day passes are considered casual riders. And customers who purchased annual memberships are considered Cyclistic members.
+In order to increase revenue for the company, the company has to come up with marketing strategies aimed at converting casual riders to annual members. I am tasked with analyzing bike usage data to understand the difference between casual riders and annual members in order to help create a data-driven marketing strategy.
+
+# Data Prep
+
+The original dataset was imported into Microsoft SQL Server with 5,667,717 rows of data when all 12 months of data have been merged. I also added a few new columns in order to help with the analysis.
+
+These are: Date, Start_time, End_time, Trip_duration & Day_of_weekThe date column is the date when the trip took place. 
+The Start_time column is the time when the trip starts. The End_time column is when the trip ends. And the Trip_duration_minute column is the trip duration calculated in minutes.
+The Day_of_week column is the day of the week when the trip took place. 961,571 rows have a trip duration of fewer than 5 minutes. 
+For a practical analysis, I removed all trips that lasted < 5 minutes for more precise results and remove any potentialy errors.
+
+Firstly, i created a new table called 'Bikedata' after uploading all 12 months of data. I then proceeded to use the 'Union All' function to combine them into one big table for easier analysis.
+
+This was possible because all tables of data had the same number of fields in the result set.
+
+INSERT INTO [dbo].[Bikedata]
+SELECT *
+FROM [dbo].[202104-divvy-tripdata]
+UNION ALL
+SELECT * 
+FROM [dbo].[202105-divvy-tripdata]
+UNION ALL
+SELECT *
+FROM [dbo].[202106-divvy-tripdata]
+UNION ALL
+SELECT *
+FROM [dbo].[202107-divvy-tripdata]
+UNION ALL
+SELECT *
+FROM [dbo].[202108-divvy-tripdata]
+UNION ALL
+SELECT *
+FROM [dbo].[202109-divvy-tripdata]
+UNION ALL
+SELECT *
+FROM [dbo].[202110-divvy-tripdata]
+UNION ALL
+SELECT *
+FROM [dbo].[202111-divvy-tripdata]
+UNION ALL
+SELECT *
+FROM [dbo].[202112-divvy-tripdata]
+UNION ALL
+SELECT *
+FROM [dbo].[202201-divvy-tripdata]
+UNION ALL
+SELECT *
+FROM [dbo].[202202-divvy-tripdata]
+UNION ALL
+SELECT *
+FROM [dbo].[202203-divvy-tripdata]
+
+Once all merged, i ran some basic queries to question the data and make sure everything came across.
+
+
+
+UPDATE Bikedata
+SET Date = CONVERT(date, [started_at])
+
+UPDATE Bikedata
+SET Time = CONVERT(time, [started_at])
+
+UPDATE Bikedata
+SET Start_time = CONVERT(time, [started_at])
+
+UPDATE Bikedata
+SET End_time = CONVERT(time, [ended_at])
+
+UPDATE Bikedata
+SET Trip_duration = DATEDIFF(Minute, Start_time,End_time)
+
+UPDATE Bikedata
+SET Day_of_week = DATENAME(WEEKDAY, date)
+
+
