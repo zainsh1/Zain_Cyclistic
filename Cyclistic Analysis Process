@@ -9,9 +9,11 @@ In order to increase revenue for the company, the company has to come up with ma
 
 The original dataset was imported into Microsoft SQL Server with 5,667,717 rows of data when all 12 months of data have been merged. I also added a few new columns in order to help with the analysis.
 
-These are: Date, Start_time, End_time, Trip_duration & Day_of_weekThe date column is the date when the trip took place. 
-The Start_time column is the time when the trip starts. The End_time column is when the trip ends. And the Trip_duration_minute column is the trip duration calculated in minutes.
-The Day_of_week column is the day of the week when the trip took place. 961,571 rows have a trip duration of fewer than 5 minutes. 
+These are: Date, Start_time, End_time, Trip_duration & Day_of_week.The date column is the date when the trip took place. 
+The Trip_duration_minute column is the trip duration calculated in minutes.
+The Start_time column is the time when the trip starts. 
+The End_time column is when the trip ends
+The Day_of_week column is the day of the week when the trip took place. 
 For a practical analysis, I removed all trips that lasted < 5 minutes for more precise results and remove any potential errors.
 
 Firstly, i created a new table called 'Bikedata' after uploading all 12 months of data. I then proceeded to use the 'Union All' function to combine them into one big table for easier analysis.
@@ -30,10 +32,9 @@ FROM [dbo].[202106-divvy-tripdata]
 
 Continuing upto [dbo].[202203-divvy-tripdata]
 
-
 Once all merged, i ran some basic queries to question the data and make sure everything came across.
 
-- Count of records
+-- Count of records
 SELECT COUNT(*)
 FROM [dbo].[Bikedata]
 
