@@ -79,3 +79,5 @@ Lastly,
 
 DELETE FROM bikedata
 WHERE trip_duration < 5
+
+
