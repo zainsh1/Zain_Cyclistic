@@ -12,7 +12,7 @@ The original dataset was imported into Microsoft SQL Server with 5,667,717 rows 
 These are: Date, Start_time, End_time, Trip_duration & Day_of_weekThe date column is the date when the trip took place. 
 The Start_time column is the time when the trip starts. The End_time column is when the trip ends. And the Trip_duration_minute column is the trip duration calculated in minutes.
 The Day_of_week column is the day of the week when the trip took place. 961,571 rows have a trip duration of fewer than 5 minutes. 
-For a practical analysis, I removed all trips that lasted < 5 minutes for more precise results and remove any potentialy errors.
+For a practical analysis, I removed all trips that lasted < 5 minutes for more precise results and remove any potential errors.
 
 Firstly, i created a new table called 'Bikedata' after uploading all 12 months of data. I then proceeded to use the 'Union All' function to combine them into one big table for easier analysis.
 
@@ -27,37 +27,34 @@ FROM [dbo].[202105-divvy-tripdata]
 UNION ALL
 SELECT *
 FROM [dbo].[202106-divvy-tripdata]
-UNION ALL
-SELECT *
-FROM [dbo].[202107-divvy-tripdata]
-UNION ALL
-SELECT *
-FROM [dbo].[202108-divvy-tripdata]
-UNION ALL
-SELECT *
-FROM [dbo].[202109-divvy-tripdata]
-UNION ALL
-SELECT *
-FROM [dbo].[202110-divvy-tripdata]
-UNION ALL
-SELECT *
-FROM [dbo].[202111-divvy-tripdata]
-UNION ALL
-SELECT *
-FROM [dbo].[202112-divvy-tripdata]
-UNION ALL
-SELECT *
-FROM [dbo].[202201-divvy-tripdata]
-UNION ALL
-SELECT *
-FROM [dbo].[202202-divvy-tripdata]
-UNION ALL
-SELECT *
-FROM [dbo].[202203-divvy-tripdata]
+
+Continuing upto [dbo].[202203-divvy-tripdata]
+
 
 Once all merged, i ran some basic queries to question the data and make sure everything came across.
 
+- Count of records
+SELECT COUNT(*)
+FROM [dbo].[Bikedata]
 
+-- Get count of records where ride_id is duplicated
+SELECT COUNT(Ride_id) as Ride_id_count
+FROM Bikedata
+GROUP BY ride_id
+HAVING COUNT(ride_id) > 1
+
+-- Count of stations that are NULL
+SELECT COUNT(*) AS records_count
+FROM Bikedata
+WHERE start_station_name IS NULL OR end_station_name IS NULL;
+
+-- Check for misspellings in rideable_type, member_casual
+SELECT rideable_type,
+member_casual
+FROM Bikedata
+GROUP BY rideable_type, member_casual;
+
+Once queried, created the below columns.
 
 UPDATE Bikedata
 SET Date = CONVERT(date, [started_at])
@@ -77,4 +74,7 @@ SET Trip_duration = DATEDIFF(Minute, Start_time,End_time)
 UPDATE Bikedata
 SET Day_of_week = DATENAME(WEEKDAY, date)
 
+Lastly,
 
+DELETE FROM bikedata
+WHERE trip_duration < 5
