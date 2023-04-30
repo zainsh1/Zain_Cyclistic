@@ -80,7 +80,6 @@ Lastly,
 DELETE FROM bikedata
 WHERE trip_duration < 5
 
-
-![count_of_riders](https://user-images.githubusercontent.com/131926841/235342885-01e77f31-08f0-4c32-85c1-687acab21b99.PNG)
+![count_of_riders](https://user-images.githubusercontent.com/131926841/235342998-d00ebc86-403f-4618-919a-d4126c31a5d9.PNG)
 
 
