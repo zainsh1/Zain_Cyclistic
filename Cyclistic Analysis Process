@@ -20,6 +20,12 @@ Firstly, i created a new table called 'Bikedata' after uploading all 12 months o
 
 This was possible because all tables of data had the same number of fields in the result set.
 
+Once all merged, i ran some basic queries to question the data and make sure everything came across.
+
+ALL SQL code for process/cleaning available below
+
+Phase 3 – Process
+
 INSERT INTO [dbo].[Bikedata]
 SELECT *
 FROM [dbo].[202104-divvy-tripdata]
@@ -28,13 +34,97 @@ SELECT *
 FROM [dbo].[202105-divvy-tripdata]
 UNION ALL
 SELECT *
-FROM [dbo].[202106-divvy-tripdata]
+FROM [dbo].[Bikedata]
 
 Continuing upto [dbo].[202203-divvy-tripdata]
 
-Once all merged, i ran some basic queries to question the data and make sure everything came across.
+-- Get count of records
+SELECT COUNT(*)
+FROM [dbo].[Bikedata]
 
-ALL SQL code for process/cleaning available 
+-- Get count of records where ended_at is earlier than started_at
+SELECT COUNT(trip_duration)
+FROM [dbo].[Bikedata]
+WHERE ended_at < started_at;
+
+-- Get count of records where ride_id is duplicate
+SELECT COUNT(ride_id) ride_id_count
+FROM [dbo].[Bikedata]
+GROUP BY ride_id HAVING COUNT(ride_id) > 1;
+
+-- Get count of records with either null start_station_name or end_station_name
+SELECT COUNT(*) AS records_count
+FROM [dbo].[Bikedata]
+WHERE start_station_name IS NULL OR end_station_name IS NULL;
+
+-- Check for spaces before and after string values
+SELECT rideable_type,
+start_station_name,
+end_station_name,
+member_casual
+FROM [dbo].[Bikedata]
+WHERE rideable_type LIKE ' %' OR rideable_type LIKE '% '
+OR start_station_name LIKE ' %' OR rideable_type LIKE '% '
+OR end_station_name LIKE ' %' OR rideable_type LIKE '% ';
+
+-- Check for misspellings in rideable_type, member_casual
+SELECT rideable_type,
+member_casual
+FROM [dbo].[Bikedata]
+GROUP BY rideable_type, member_casual;
+
+-- Get count of records with test name in either null start_station_name or end_station_name
+SELECT COUNT(*) AS records_count
+FROM [dbo].[Bikedata]
+WHERE start_station_name LIKE ('%test%') OR end_station_name LIKE ('%test%');
+
+SELECT COUNT(*) AS records_count
+FROM [dbo].[Bikedata]
+WHERE start_station_name LIKE ('%TEST%') OR end_station_name LIKE ('%TEST%');
+
+SELECT COUNT(*) AS records_count
+FROM [dbo].[Bikedata]
+WHERE start_station_name LIKE ('%Test%') OR end_station_name LIKE ('%Test%');
+
+-- Delete records where ended_at is earlier than started_at
+DELETE FROM [dbo].[Bikedata]
+WHERE ended_at < started_at;
+
+-- Delete records with duplicate ride_id
+DELETE FROM [dbo].[Bikedata]
+WHERE ride_id IN (SELECT ride_id
+FROM [dbo].[Bikedata]
+GROUP BY ride_id HAVING COUNT(ride_id) > 1);
+
+-- Delete records with either null start_station_name or end_station_name
+DELETE FROM [dbo].[Bikedata]
+WHERE start_station_name IS NULL OR end_station_name IS NULL;
+
+-- Delete records with - 'TEST' or 'test' in either start_station_name or end_station_name
+DELETE FROM [dbo].[Bikedata]
+WHERE start_station_name LIKE ('%test%') OR end_station_name LIKE ('%test%')
+OR start_station_name LIKE ('%TEST%') OR end_station_name LIKE ('%TEST%');
+
+Phase 4 - Analyse
+
+-- Member type percentage distribution
+SELECT member_casual, COUNT(member_casual) AS member_casual_count
+FROM [dbo].[Bikedata]
+GROUP BY member_casual;
+
+-- Type of preferred bike per member type
+SELECT member_casual,
+rideable_type,
+COUNT(rideable_type) AS rideable_type_count
+FROM [dbo].[Bikedata]
+GROUP BY member_casual, rideable_type;
+
+-- Number of rides by day of the week per member type
+SELECT member_casual, day_of_week, COUNT(ride_id) AS rides_count
+FROM [dbo].[Bikedata]
+GROUP BY member_casual, day_of_week
+ORDER BY member_casual;
+
 
 Dashboard at https://public.tableau.com/views/Zain_ShareefCyclisticAnalysis/Zain_ShareefCyclisticAnalysis?:language=en-US&:display_count=n&:origin=viz_share_link
 Also available in the images section.
