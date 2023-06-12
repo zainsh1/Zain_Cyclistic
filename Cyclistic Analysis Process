@@ -34,51 +34,7 @@ Continuing upto [dbo].[202203-divvy-tripdata]
 
 Once all merged, i ran some basic queries to question the data and make sure everything came across.
 
--- Count of records
-SELECT COUNT(*)
-FROM [dbo].[Bikedata]
-
--- Get count of records where ride_id is duplicated
-SELECT COUNT(Ride_id) as Ride_id_count
-FROM Bikedata
-GROUP BY ride_id
-HAVING COUNT(ride_id) > 1
-
--- Count of stations that are NULL
-SELECT COUNT(*) AS records_count
-FROM Bikedata
-WHERE start_station_name IS NULL OR end_station_name IS NULL;
-
--- Check for misspellings in rideable_type, member_casual
-SELECT rideable_type,
-member_casual
-FROM Bikedata
-GROUP BY rideable_type, member_casual;
-
-Once queried, created the below columns.
-
-UPDATE Bikedata
-SET Date = CONVERT(date, [started_at])
-
-UPDATE Bikedata
-SET Time = CONVERT(time, [started_at])
-
-UPDATE Bikedata
-SET Start_time = CONVERT(time, [started_at])
-
-UPDATE Bikedata
-SET End_time = CONVERT(time, [ended_at])
-
-UPDATE Bikedata
-SET Trip_duration = DATEDIFF(Minute, Start_time,End_time)
-
-UPDATE Bikedata
-SET Day_of_week = DATENAME(WEEKDAY, date)
-
-Lastly,
-
-DELETE FROM bikedata
-WHERE trip_duration < 5
+ALL SQL code for process/cleaning available here
 
 Dashboard at https://public.tableau.com/views/Zain_ShareefCyclisticAnalysis/Zain_ShareefCyclisticAnalysis?:language=en-US&:display_count=n&:origin=viz_share_link
 Also available in the images section.
