@@ -24,8 +24,6 @@ Once all merged, i ran some basic queries to question the data and make sure eve
 
 ALL SQL code for process/cleaning available below
 
-![image](https://github.com/zainsh1/Zain_Cyclistic/assets/131926841/63bd0e39-95d1-4bf3-b9c7-2829cad397b2)
-
 Phase 3 – Process
 
 INSERT INTO [dbo].[Bikedata]
