@@ -131,7 +131,6 @@ ORDER BY member_casual;
 
 
 Dashboard at https://public.tableau.com/views/Zain_ShareefCyclisticAnalysis/Zain_ShareefCyclisticAnalysis?:language=en-US&:display_count=n&:origin=viz_share_link
-Also available in the images section.
 
 Conclusions:
 
