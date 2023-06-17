@@ -1,6 +1,6 @@
 # Zain_Shareef Cyclistic Data Analysis with MS SQL Server & Tableau
 
-![image](https://github.com/zainsh1/Zain_Cyclistic/assets/131926841/63bd0e39-95d1-4bf3-b9c7-2829cad397b2)
+![cyclistic](https://github.com/zainsh1/Zain_Cyclistic/assets/131926841/94b56c8d-01bd-4530-a0d5-94ed33f2e4a1)
 
 # Background
 For this case study, I am working as a junior data analyst in the marketing analyst team at Cyclistic, a fictional bike-share company based in Chicago. Since 2016, the company has grown to a fleet of 5,824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other stations within the network at any time.
