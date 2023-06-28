@@ -24,7 +24,7 @@ This was possible because all tables of data had the same number of fields in th
 
 Once all merged, i ran some basic queries to question the data and make sure everything came across.
 
-ALL SQL code for process/cleaning available https://github.com/zainsh1/Zain_Cyclistic/blob/main/sql_queries
+ALL SQL code for process/cleaning available [Here](https://github.com/zainsh1/Zain_Cyclistic/blob/main/sql_queries)
 
 Conclusions:
 
